@@ -88,11 +88,6 @@ export default function Table({ maker, sortKey, sortDir, onMakerChange, onSort, 
                     <span style={{ fontSize: 14, fontWeight: 900, whiteSpace: "nowrap", textDecoration: "underline", textDecorationColor: "var(--ink-disabled-3)", textUnderlineOffset: 3 }}>
                       {m.name}
                     </span>
-                    {m.pending && (
-                      <span style={{ padding: "2px 8px", borderRadius: 999, background: "var(--card-sub)", border: "1px solid var(--card-border)", fontSize: 10, fontWeight: 900, color: "var(--ink-faint-2)", whiteSpace: "nowrap" }}>
-                        測定中
-                      </span>
-                    )}
                   </div>
                 </td>
                 <td style={{ padding: `${padY}px 9px`, borderBottom: "1px solid var(--rule)", fontSize: 12, fontWeight: 700, color: "var(--ink-faint)", whiteSpace: "nowrap" }}>
@@ -112,7 +107,7 @@ export default function Table({ maker, sortKey, sortDir, onMakerChange, onSort, 
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {m.pending && tm.key !== "pOut" ? "測定中" : tm.fmt(m[tm.key])}
+                    {tm.fmt(m[tm.key])}
                   </td>
                 ))}
                 <td

@@ -36,25 +36,6 @@ export type ModelDetailView = {
 export function buildModelDetail(name: string, mounted: boolean): ModelDetailView | null {
   const dm = MODELS.find((m) => m.name === name);
   if (!dm) return null;
-  if (dm.pending) {
-    return {
-      kind: "model",
-      modelId: dm.id,
-      name: dm.name,
-      maker: dm.maker,
-      color: dm.color,
-      bg: SOFT(dm.hue),
-      note: "現在このモデルは能力測定中です。ベンチマークが確定次第、正式にランキングへ反映します。",
-      quarter: dm.quarter,
-      price: `$${dm.pIn} / $${dm.pOut} （入力 / 出力・100万トークン）`,
-      companyTag: COMPANY[dm.maker]?.tag || "",
-      rows: [],
-      wins: [],
-      hasRows: false,
-      hasCompany: true,
-      cols: "1fr",
-    };
-  }
   const rows: ModelDetailRow[] = METRICS.map((mt) => {
     const r = rankOf(dm, mt);
     const barFrac = mt.lowerBetter ? 1 - dm[mt.key] / mt.max : dm[mt.key] / mt.max;
@@ -127,7 +108,6 @@ export type CompanyDetailView = {
     price: string;
     color: string;
     barPct: number;
-    pending?: boolean;
   }[];
 };
 
@@ -153,11 +133,10 @@ export function buildCompanyDetail(maker: string, mounted: boolean): CompanyDeta
     models: models.map((m) => ({
       name: m.name,
       overall: m.overall,
-      coding: m.pending ? "測定中" : m.coding.toFixed(1) + "%",
+      coding: m.coding.toFixed(1) + "%",
       price: `$${m.pIn} / $${m.pOut}`,
       color: m.color,
       barPct: mounted ? m.overall : 0,
-      pending: m.pending,
     })),
   };
 }

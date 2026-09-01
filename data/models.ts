@@ -14,9 +14,6 @@ export type RawModel = {
   ctx: number; // K tokens
   speed: number; // tok/s
   ttft: number; // s
-  // trueの場合、ベンチマークが未確定（発表直後等）。価格以外は仮値のため
-  // RANKABLE_MODELSから除外し、一覧表示でのみ「測定中」として扱う。
-  pending?: boolean;
 };
 
 // q = QUARTERS index / pIn,pOut = $ per 1M tokens / coding = SWE-bench Verified %
@@ -40,7 +37,6 @@ const RAW: RawModel[] = [
   { name: "DeepSeek V4 Flash", maker: "DeepSeek", q: 3, pIn: 0.14, pOut: 0.28, overall: 74, coding: 80.0, pro: 45.0, ja: 78, mm: 40, ctx: 1000, speed: 200, ttft: 1.2 },
   { name: "MiniMax M3", maker: "MiniMax", q: 4, pIn: 0.6, pOut: 2.4, overall: 76, coding: 80.5, pro: 48.0, ja: 80, mm: 65, ctx: 1000, speed: 150, ttft: 1.5 },
   { name: "GLM-5.3", maker: "Z.ai", q: 5, pIn: 1.4, pOut: 4.4, overall: 86, coding: 84.0, pro: 55.0, ja: 79, mm: 62, ctx: 1000, speed: 110, ttft: 2.0 },
-  { name: "Claude Fable 5.1", maker: "Anthropic", q: 5, pIn: 10, pOut: 50, overall: 0, coding: 0, pro: 0, ja: 0, mm: 0, ctx: 0, speed: 0, ttft: 0, pending: true },
 ];
 
 export type Model = RawModel & {
@@ -61,7 +57,3 @@ export const MODELS: Model[] = RAW.map((m, i) => ({
   cost: m.overall / m.pOut,
   quarter: QUARTERS[m.q],
 }));
-
-// ランキング・比較（部門別/最強/散布図/レーダー/対決/会社ランキング）に使う配列。
-// pending中のモデルは仮値（0）しか持たないため、順位計算からは除外する。
-export const RANKABLE_MODELS: Model[] = MODELS.filter((m) => !m.pending);

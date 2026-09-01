@@ -1,4 +1,4 @@
-import { RANKABLE_MODELS as MODELS } from "@/data/models";
+import { MODELS } from "@/data/models";
 import { METRICS } from "@/data/metrics";
 import { useIsMobile } from "@/lib/useIsMobile";
 

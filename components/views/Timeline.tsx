@@ -79,7 +79,7 @@ export default function Timeline({ qi, playing, onToggle, onQuarterChange }: Pro
                     </span>
                   </div>
                   <span className="font-num" style={{ fontSize: 17, fontWeight: 900, color: m.color, flex: "none" }}>
-                    {m.on ? (m.pending ? "測定中" : m.overall) : "—"}
+                    {m.on ? m.overall : "—"}
                   </span>
                 </div>
                 <div style={{ height: 12, borderRadius: 999, background: "var(--bar-track)", overflow: "hidden" }}>
@@ -108,7 +108,7 @@ export default function Timeline({ qi, playing, onToggle, onQuarterChange }: Pro
                   />
                 </div>
                 <span className="font-num" style={{ fontSize: 19, fontWeight: 900, textAlign: "right", color: m.color }}>
-                  {m.on ? (m.pending ? "測定中" : m.overall) : "—"}
+                  {m.on ? m.overall : "—"}
                 </span>
               </div>
             )

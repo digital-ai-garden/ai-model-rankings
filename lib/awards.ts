@@ -1,4 +1,4 @@
-import { RANKABLE_MODELS as MODELS } from "@/data/models";
+import { MODELS } from "@/data/models";
 import { METRICS, AWARD_EN, AWARD_TITLE, SOFT } from "@/data/metrics";
 import { CREATIVE, CREATIVE_NOTE, type CreativeCategory } from "@/data/creative";
 import { buildCompanyRanking } from "./ranking";
