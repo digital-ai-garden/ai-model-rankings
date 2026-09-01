@@ -85,8 +85,8 @@ export default function CompanyDetail({
             >
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
                 <span style={{ fontSize: 15, fontWeight: 900 }}>{m.name}</span>
-                <span className="font-num" style={{ fontSize: 19, fontWeight: 900, color: m.color }}>
-                  {m.overall}
+                <span className="font-num" style={{ fontSize: 19, fontWeight: 900, color: m.pending ? "var(--ink-faint-2)" : m.color }}>
+                  {m.pending ? "測定中" : m.overall}
                 </span>
               </div>
               <div style={{ height: 8, borderRadius: 999, background: "var(--bar-track)", overflow: "hidden" }}>
