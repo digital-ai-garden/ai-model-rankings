@@ -51,7 +51,7 @@ export default function News({ newsList, catChips, onCatChange, catStats, newsUp
               }}
             >
               <div className="mq-hide" style={{ display: isMobile ? "none" : "block" }}>
-                <ImageSlot width={148} height={110} credit={n.credit} />
+                <ImageSlot width={148} height={110} src={n.image} credit={n.credit} />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>

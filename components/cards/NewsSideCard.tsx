@@ -24,7 +24,7 @@ export default function NewsSideCard({ n, onClick }: { n: NewsWithExcerpt; onCli
           {n.date} · {n.ago}
         </span>
       </div>
-      <ImageSlot height={120} credit={n.credit} />
+      <ImageSlot height={120} src={n.image} credit={n.credit} />
       <span style={{ fontSize: 15, fontWeight: 900, lineHeight: 1.45 }}>{n.title}</span>
       <span style={{ fontSize: 12, lineHeight: 1.7, color: "var(--ink-sub)" }}>{n.excerpt}</span>
     </article>

@@ -5,6 +5,7 @@ export type NewsItem = {
   body: string;
   source: string;
   url: string;
+  image?: string; // "/news/xxxx.jpg" publicディレクトリ配下の相対パス
   credit?: string;
 };
 

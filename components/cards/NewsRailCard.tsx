@@ -21,7 +21,7 @@ export default function NewsRailCard({ n, onClick }: { n: DecoratedNews; onClick
       }}
     >
       <div className="mq-hide" style={{ display: isMobile ? "none" : "flex", flexDirection: "column", gap: 4 }}>
-        <ImageSlot width={130} height={98} credit={n.credit} />
+        <ImageSlot width={130} height={98} src={n.image} credit={n.credit} />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
