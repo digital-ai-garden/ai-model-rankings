@@ -1,4 +1,4 @@
-import { MODELS } from "@/data/models";
+import { RANKABLE_MODELS as MODELS } from "@/data/models";
 import { METRICS, type MetricKey } from "@/data/metrics";
 
 export type RankedModel = {

@@ -1,4 +1,4 @@
-import { MODELS, type Model } from "@/data/models";
+import { RANKABLE_MODELS as MODELS, type Model } from "@/data/models";
 import { HUE, C, SOFT, type Metric } from "@/data/metrics";
 
 /**

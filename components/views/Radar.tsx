@@ -1,5 +1,5 @@
 import { RADAR } from "@/data/metrics";
-import { MODELS, type Model } from "@/data/models";
+import { RANKABLE_MODELS as MODELS, type Model } from "@/data/models";
 import { SOFT } from "@/data/metrics";
 import { useIsMobile } from "@/lib/useIsMobile";
 
