@@ -27,14 +27,14 @@ export default function Scatter({ points, mounted, onOpenModel }: Props) {
         style={{
           position: "relative",
           background: "var(--card)",
-          border: "1.5px solid var(--card-border)",
+          border: "1px solid var(--card-border)",
           borderRadius: 22,
-          boxShadow: "0 4px 0 var(--card-border)",
+          boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
           padding: "26px 34px 46px 58px",
           minWidth: isMobile ? 820 : undefined,
         }}
       >
-        <div style={{ position: "relative", height: 460, borderLeft: "1.5px solid var(--rule-strong)", borderBottom: "1.5px solid var(--rule-strong)" }}>
+        <div style={{ position: "relative", height: 460, borderLeft: "1px solid var(--rule-strong)", borderBottom: "1px solid var(--rule-strong)" }}>
           {gridY.map((g) => (
             <div key={g.label} style={{ position: "absolute", left: 0, right: 0, top: `${g.topPct}%`, borderTop: "1px dashed var(--grid-dash)" }}>
               <span className="font-num" style={{ position: "absolute", left: -44, top: -9, fontSize: 11, color: "var(--ink-faint-2)" }}>

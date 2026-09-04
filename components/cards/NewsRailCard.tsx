@@ -14,9 +14,9 @@ export default function NewsRailCard({ n, onClick }: { n: DecoratedNews; onClick
         gap: isMobile ? 8 : 16,
         padding: isMobile ? "14px 16px" : "18px 22px",
         background: "var(--card)",
-        border: "1.5px solid var(--card-border)",
+        border: "1px solid var(--card-border)",
         borderRadius: 18,
-        boxShadow: "0 3px 0 var(--card-border)",
+        boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
         cursor: "pointer",
       }}
     >

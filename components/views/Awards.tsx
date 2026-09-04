@@ -4,6 +4,7 @@ import type { Award } from "@/lib/awards";
 import type { CompanyRank } from "@/lib/ranking";
 import { useIsMobile } from "@/lib/useIsMobile";
 import AwardCard from "../cards/AwardCard";
+import BrandLogo from "../BrandLogo";
 
 type RankedCompany = CompanyRank & { place: number };
 
@@ -36,7 +37,7 @@ export default function Awards({ companies, awards, onOpenCompany, onAwardClick,
               alignItems: "center",
               padding: isMobile ? "8px 12px" : "9px 16px",
               background: c.place === 1 ? c.monoBg : "var(--card)",
-              border: `1.5px solid ${c.place === 1 ? c.color : "var(--card-border)"}`,
+              border: `1px solid ${c.place === 1 ? c.color : "var(--card-border)"}`,
               borderRadius: 13,
               cursor: "pointer",
             }}
@@ -45,7 +46,6 @@ export default function Awards({ companies, awards, onOpenCompany, onAwardClick,
               {c.place}
             </span>
             <span
-              className="font-num"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -54,12 +54,10 @@ export default function Awards({ companies, awards, onOpenCompany, onAwardClick,
                 height: 24,
                 borderRadius: 7,
                 background: c.place === 1 ? "var(--card)" : c.monoBg,
-                fontSize: 11,
-                fontWeight: 900,
-                color: c.color,
               }}
             >
-              {c.initial}
+              {/* 会社の一覧なので会社のロゴ */}
+              <BrandLogo maker={c.maker} size={15} />
             </span>
             <span style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
               <span style={{ fontSize: isMobile ? 13 : 14, fontWeight: 900, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>

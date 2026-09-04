@@ -17,7 +17,8 @@ import ModelDetail from "@/components/detail/ModelDetail";
 import CompanyDetail from "@/components/detail/CompanyDetail";
 
 import { NEWS_SEED } from "@/data/news";
-import { CAT_HUE, QUARTERS, type MetricKey, type TabId } from "@/data/metrics";
+import { MODELS } from "@/data/models";
+import { CAT_HUE, METRICS, QUARTERS, type MetricKey, type TabId } from "@/data/metrics";
 import { C } from "@/data/metrics";
 import { pill } from "@/lib/ui";
 import { decorate, formatDataAsOf, type DecoratedNews } from "@/lib/news";
@@ -61,6 +62,17 @@ export default function Page() {
   }, [playing]);
 
   const today = useMemo(() => new Date(), []);
+
+  // 手書きの件数は実データとずれる（実際に「18 models」のまま19件になっていた）。
+  // 正確さがこのサイトの看板なので、必ずデータから数える。
+  const counts = useMemo(
+    () => ({
+      models: MODELS.length,
+      providers: new Set(MODELS.map((m) => m.maker)).size,
+      metrics: METRICS.length,
+    }),
+    []
+  );
 
   const changeTab = (t: TabId) => {
     setTab(t);
@@ -155,7 +167,7 @@ export default function Page() {
           {dataAsOf}
         </span>
         <span className="font-num" style={{ fontSize: 12, color: "var(--ink-faint-2)", alignSelf: "center" }}>
-          18 models / 9 providers / 10 metrics
+          {counts.models} models / {counts.providers} providers / {counts.metrics} metrics
         </span>
       </div>
 
@@ -184,7 +196,12 @@ export default function Page() {
                 news={homeNews}
                 onGoNews={() => changeTab("news")}
                 onGoAwards={() => changeTab("awards")}
+                onGoTable={() => changeTab("table")}
                 onAwardClick={onAwardClick}
+                onOpenModel={openModel}
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onSort={sortBy}
               />
             )}
             {tab === "news" && (

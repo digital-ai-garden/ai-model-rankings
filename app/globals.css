@@ -1,34 +1,39 @@
 @import "tailwindcss";
 
+/*
+ * 2026-09-03：暖色クリーム系から、白背景・ニュートラルグレーへ全面移行。
+ * 「素人が作ったサイトに見える」というCEO指摘への対応。
+ * 変更したのは色と影だけで、変数名と構造は元のまま（全ビューにそのまま効く）。
+ */
 :root {
-  --bg-base: #fbf9f4;
+  --bg-base: #ffffff;
   --card: #ffffff;
-  --card-sub: #fdfaf2;
-  --card-sub-2: #fdfbf6;
-  --card-sub-3: #fffdf7;
-  --card-border: #efe9dc;
-  --rule: #f4f0e7;
-  --rule-strong: #e9e3d6;
-  --grid-dash: #f0ebe0;
-  --bar-track: #f4f0e7;
-  --dark-bg: #191817;
-  --dark-fg: #fdfaf2;
+  --card-sub: #fafafa;
+  --card-sub-2: #fbfbfb;
+  --card-sub-3: #fcfcfc;
+  --card-border: #e4e4e7;
+  --rule: #f1f1f3;
+  --rule-strong: #e0e0e4;
+  --grid-dash: #ececef;
+  --bar-track: #f1f1f3;
+  --dark-bg: #18181b;
+  --dark-fg: #fafafa;
 
-  --ink: #191817;
-  --ink-body: #4a463f;
-  --ink-body-2: #575249;
-  --ink-sub: #6c675e;
-  --ink-sub-2: #7d776c;
-  --ink-weak: #857f74;
-  --ink-weak-2: #8a8478;
-  --ink-weak-3: #8b8579;
-  --ink-faint: #9b958a;
-  --ink-faint-2: #a5a096;
-  --ink-faint-3: #b0aa9f;
-  --ink-disabled: #c2bcb0;
-  --ink-disabled-2: #d8d2c5;
-  --ink-disabled-3: #dcd6c9;
-  --ink-disabled-4: #ddd7ca;
+  --ink: #18181b;
+  --ink-body: #3f3f46;
+  --ink-body-2: #4b4b52;
+  --ink-sub: #5c5c66;
+  --ink-sub-2: #6b6b75;
+  --ink-weak: #71717a;
+  --ink-weak-2: #7a7a85;
+  --ink-weak-3: #82828d;
+  --ink-faint: #8e8e98;
+  --ink-faint-2: #9a9aa4;
+  --ink-faint-3: #a6a6b0;
+  --ink-disabled: #b8b8c0;
+  --ink-disabled-2: #d2d2d8;
+  --ink-disabled-3: #d8d8de;
+  --ink-disabled-4: #dcdce1;
 
   --note-bg: #fdf7e8;
   --note-border: #e6d9b8;
@@ -62,12 +67,29 @@ body {
   overflow-x: hidden;
   touch-action: manipulation;
   background: var(--bg-base);
-  background-image:
-    radial-gradient(1200px 600px at 80% -10%, #fff3d6 0%, rgba(255, 243, 214, 0) 60%),
-    radial-gradient(900px 500px at 5% 5%, #e8f2ff 0%, rgba(232, 242, 255, 0) 55%);
-  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-jp);
+}
+
+/*
+ * 2026-09-04：純白一色は「もっさり」の一因だったため、地に表情を戻した。
+ * ヘッダーのバナーと呼応させるため、上部に淡いカラーウォッシュを敷き、
+ * 全面に回路基板を思わせる極薄のグリッドを重ねている。
+ * いずれも本文の可読性を邪魔しない濃度に抑える。
+ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(900px 420px at 12% -6%, rgba(80, 190, 160, 0.13), transparent 62%),
+    radial-gradient(1000px 460px at 52% -10%, rgba(120, 130, 245, 0.14), transparent 64%),
+    radial-gradient(900px 420px at 90% -6%, rgba(245, 150, 70, 0.12), transparent 62%),
+    linear-gradient(to bottom, rgba(24, 24, 27, 0.035) 1px, transparent 1px),
+    linear-gradient(to right, rgba(24, 24, 27, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 46px 46px, 46px 46px;
 }
 
 body * {
@@ -119,8 +141,9 @@ a:hover {
 .detail-pop {
   animation: pop 0.3s ease both;
 }
+/* 2026-09-03：常時揺れ続ける動きは落ち着かないため停止した（クラス名は据え置き） */
 .floaty {
-  animation: floaty 3.2s ease-in-out infinite;
+  animation: none;
 }
 
 .bar-fill {

@@ -1,4 +1,5 @@
 import type { Award } from "@/lib/awards";
+import BrandLogo from "../BrandLogo";
 
 export default function SmallAwardCard({ a, onClick }: { a: Award; onClick: () => void }) {
   return (
@@ -13,9 +14,9 @@ export default function SmallAwardCard({ a, onClick }: { a: Award; onClick: () =
         gap: 8,
         padding: "13px 14px",
         background: "var(--card)",
-        border: "1.5px solid var(--card-border)",
+        border: "1px solid var(--card-border)",
         borderRadius: 16,
-        boxShadow: "0 3px 0 var(--card-border)",
+        boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
         cursor: "pointer",
       }}
     >
@@ -27,8 +28,8 @@ export default function SmallAwardCard({ a, onClick }: { a: Award; onClick: () =
           </span>
         )}
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "9px 10px", borderRadius: 11, background: a.winBg }}>
-        <span style={{ fontSize: 15, lineHeight: 1 }}>👑</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "9px 10px", borderRadius: 8, background: a.winBg }}>
+        {a.kind === "metric" && <BrandLogo maker={a.winnerMaker} model={a.winner} size={16} />}
         <div style={{ display: "flex", flexDirection: "column", minWidth: 0, flex: 1 }}>
           <span
             style={{

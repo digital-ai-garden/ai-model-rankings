@@ -12,9 +12,9 @@ export default function NewsSideCard({ n, onClick }: { n: NewsWithExcerpt; onCli
         gap: 9,
         padding: "17px 20px",
         background: "var(--card)",
-        border: "1.5px solid var(--card-border)",
+        border: "1px solid var(--card-border)",
         borderRadius: 18,
-        boxShadow: "0 3px 0 var(--card-border)",
+        boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
         cursor: "pointer",
       }}
     >

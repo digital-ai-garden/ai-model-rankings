@@ -2,6 +2,7 @@ import { RADAR } from "@/data/metrics";
 import { RANKABLE_MODELS as MODELS, type Model } from "@/data/models";
 import { SOFT } from "@/data/metrics";
 import { useIsMobile } from "@/lib/useIsMobile";
+import BrandLogo from "../BrandLogo";
 
 type Props = {
   picks: string[];
@@ -58,9 +59,9 @@ export default function Radar({ picks, mounted, onPick }: Props) {
         <div
           style={{
             background: "var(--card)",
-            border: "1.5px solid var(--card-border)",
+            border: "1px solid var(--card-border)",
             borderRadius: 22,
-            boxShadow: "0 4px 0 var(--card-border)",
+            boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
             padding: isMobile ? 16 : 26,
             display: "flex",
             justifyContent: "center",
@@ -106,14 +107,14 @@ export default function Radar({ picks, mounted, onPick }: Props) {
                 gap: 12,
                 padding: "12px 16px",
                 borderRadius: 15,
-                border: `1.5px solid ${on ? m.color : "var(--card-border)"}`,
+                border: `1px solid ${on ? m.color : "var(--card-border)"}`,
                 background: on ? SOFT(m.hue) : "var(--card)",
-                boxShadow: "0 3px 0 var(--card-border)",
+                boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
                 textAlign: "left",
                 cursor: "pointer",
               }}
             >
-              <span style={{ width: 14, height: 14, borderRadius: 5, background: on ? m.color : "var(--ink-disabled-3)", flex: "none" }} />
+              <BrandLogo maker={m.maker} model={m.name} size={17} />
               <span style={{ flex: 1, fontSize: 15, fontWeight: 900, color: "#24221f" }}>{m.name}</span>
               <span style={{ fontSize: 12, fontWeight: 700, color: "var(--ink-faint)" }}>{m.maker}</span>
               <span className="font-num" style={{ fontSize: 16, fontWeight: 900, color: on ? m.color : "var(--ink-disabled-3)" }}>

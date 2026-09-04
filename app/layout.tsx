@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Zen_Kaku_Gothic_New, Outfit } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 
 const zenKaku = Zen_Kaku_Gothic_New({
   subsets: ["latin"],
@@ -17,6 +18,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "ＡＩモデル最強比較",
   description:
     "世界で稼働中のAIモデルを価格 vs 性能のコスパで比較し、毎日更新のAIニュースを日本語で読める比較サイト。",

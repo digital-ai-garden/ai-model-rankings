@@ -1,24 +1,43 @@
-"use client";
+// サイト上部のヒーローバナー。
+//
+// 【画像の出し分け】
+//   JSの useIsMobile は使わない。描画後に切り替わるとちらつくため、
+//   <picture> のメディアクエリでブラウザに確定させる。
+//   /erabikata/ はサーバーコンポーネントなので、その点でも都合がよい。
+//
+// 【差し替えについて】
+//   バナーには3社のロゴが含まれる（リスクを承知のうえでのオーナー判断・ADM-013/014）。
+//   権利者から申し出があった場合は public/hero-wide.jpg と hero-compact.jpg の
+//   2ファイルを置き換えるだけで済むよう、参照箇所をこのファイル1つに閉じている。
 
-import { ACCENT } from "@/lib/ui";
-import { useIsMobile } from "@/lib/useIsMobile";
-
-export default function Header() {
-  const isMobile = useIsMobile();
+export default function Header({ showPicksLink = true }: { showPicksLink?: boolean }) {
   return (
-    <header style={{ maxWidth: 1220, margin: "0 auto", padding: isMobile ? "16px 16px 0" : "22px 28px 0" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <span className="floaty" style={{ display: "inline-block", width: 10, height: 10, borderRadius: 3, background: ACCENT }} />
-        <span
-          className="font-num"
-          style={{ fontWeight: 700, fontSize: 10.5, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-weak-3)" }}
-        >
-          AI Model Rankings
-        </span>
-      </div>
-      <h1 style={{ margin: "3px 0 0", fontSize: isMobile ? 20 : 26, fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.01em" }}>
-        ＡＩモデル<span style={{ color: ACCENT }}>最強</span>比較
-      </h1>
+    <header style={{ maxWidth: 1220, margin: "0 auto", padding: "10px 16px 0" }}>
+      <a href="/" style={{ display: "block", textDecoration: "none" }}>
+        <picture>
+          <source media="(max-width: 720px)" srcSet="/hero-compact.jpg" />
+          <img
+            src="/hero-wide.jpg"
+            alt="ＡＩモデル最強比較 — AI Model Rankings"
+            width={1800}
+            height={383}
+            style={{
+              display: "block",
+              width: "100%",
+              height: "auto",
+              borderRadius: 18,
+            }}
+          />
+        </picture>
+      </a>
+
+      {showPicksLink && (
+        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 8 }}>
+          <a href="/erabikata/" style={{ fontSize: 13.5, fontWeight: 700, whiteSpace: "nowrap" }}>
+            用途から選ぶ →
+          </a>
+        </div>
+      )}
     </header>
   );
 }

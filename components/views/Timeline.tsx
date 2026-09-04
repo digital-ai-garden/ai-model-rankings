@@ -2,6 +2,7 @@ import { MODELS } from "@/data/models";
 import { QUARTERS } from "@/data/metrics";
 import { ACCENT } from "@/lib/ui";
 import { useIsMobile } from "@/lib/useIsMobile";
+import BrandLogo from "../BrandLogo";
 
 type Props = {
   qi: number;
@@ -31,9 +32,9 @@ export default function Timeline({ qi, playing, onToggle, onQuarterChange }: Pro
       <div
         style={{
           background: "var(--card)",
-          border: "1.5px solid var(--card-border)",
+          border: "1px solid var(--card-border)",
           borderRadius: 22,
-          boxShadow: "0 4px 0 var(--card-border)",
+          boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
           padding: isMobile ? "16px 16px" : "24px 28px",
         }}
       >
@@ -73,7 +74,10 @@ export default function Timeline({ qi, playing, onToggle, onQuarterChange }: Pro
               <div key={m.id} className="timeline-fade" style={{ display: "flex", flexDirection: "column", gap: 5, opacity: m.on ? 1 : 0.16 }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8 }}>
                   <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                    <span style={{ fontSize: 14, fontWeight: 900, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.name}</span>
+                    <span style={{ display: "flex", alignItems: "center", gap: 7, minWidth: 0 }}>
+                      <BrandLogo maker={m.maker} model={m.name} size={15} />
+                      <span style={{ fontSize: 14, fontWeight: 900, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.name}</span>
+                    </span>
                     <span style={{ fontSize: 10.5, fontWeight: 700, color: "var(--ink-faint-2)" }}>
                       {m.maker} · {m.quarter}
                     </span>
@@ -96,7 +100,10 @@ export default function Timeline({ qi, playing, onToggle, onQuarterChange }: Pro
                 style={{ display: "grid", gridTemplateColumns: "210px 1fr 60px", gap: 14, alignItems: "center", opacity: m.on ? 1 : 0.16 }}
               >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <span style={{ fontSize: 15, fontWeight: 900 }}>{m.name}</span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <BrandLogo maker={m.maker} model={m.name} size={16} />
+                    <span style={{ fontSize: 15, fontWeight: 900 }}>{m.name}</span>
+                  </span>
                   <span style={{ fontSize: 11, fontWeight: 700, color: "var(--ink-faint-2)" }}>
                     {m.maker} · {m.quarter}
                   </span>

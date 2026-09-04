@@ -2,6 +2,7 @@ import type { CompanyDetailView } from "@/lib/detail";
 import { backBtn, cardLg } from "@/lib/ui";
 import { useIsMobile } from "@/lib/useIsMobile";
 import ImageSlot from "../ImageSlot";
+import BrandLogo from "../BrandLogo";
 
 export default function CompanyDetail({
   cd,
@@ -27,7 +28,11 @@ export default function CompanyDetail({
               <span className="font-num" style={{ fontSize: 11, fontWeight: 900, letterSpacing: "0.16em", color: "var(--ink-faint-2)" }}>
                 会社ランキング {cd.place}位
               </span>
-              <h2 style={{ margin: 0, fontSize: isMobile ? 24 : 32, fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.02em" }}>{cd.maker}</h2>
+              <h2 style={{ margin: 0, fontSize: isMobile ? 24 : 32, fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.02em", display: "flex", alignItems: "center", gap: 11 }}>
+                {/* 会社のページなので会社のロゴ */}
+                <BrandLogo maker={cd.maker} size={isMobile ? 26 : 32} />
+                {cd.maker}
+              </h2>
             </div>
           </div>
           <span style={{ fontSize: 14, fontWeight: 900, color: cd.color }}>{cd.tag}</span>
@@ -79,12 +84,15 @@ export default function CompanyDetail({
                 gap: 8,
                 padding: "14px 16px",
                 borderRadius: 16,
-                border: "1.5px solid var(--card-border)",
+                border: "1px solid var(--card-border)",
                 cursor: "pointer",
               }}
             >
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
-                <span style={{ fontSize: 15, fontWeight: 900 }}>{m.name}</span>
+                <span style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+                  <BrandLogo maker={cd.maker} model={m.name} size={16} />
+                  <span style={{ fontSize: 15, fontWeight: 900 }}>{m.name}</span>
+                </span>
                 <span className="font-num" style={{ fontSize: 19, fontWeight: 900, color: m.pending ? "var(--ink-faint-2)" : m.color }}>
                   {m.pending ? "測定中" : m.overall}
                 </span>

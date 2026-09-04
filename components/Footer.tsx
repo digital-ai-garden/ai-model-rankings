@@ -35,7 +35,7 @@ export default function Footer() {
           gap: 20,
           marginTop: 22,
           paddingTop: 22,
-          borderTop: "1.5px solid var(--card-border)",
+          borderTop: "1px solid var(--card-border)",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -51,17 +51,27 @@ export default function Footer() {
           </span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span style={{ fontSize: 12, fontWeight: 900, color: "var(--ink-sub)" }}>商標について</span>
+          <span style={{ fontSize: 12, fontWeight: 900, color: "var(--ink-sub)" }}>商標・ロゴについて</span>
           <span>
-            記載の会社名・製品名・ロゴは各社の商標または登録商標です。本サイトでは比較・報道の目的で識別のために使用しており、各社との提携・後援・推奨関係を示すものではありません。
+            記載の会社名・製品名・ロゴは各社の商標または登録商標です。本サイトでは<strong>比較・報道の目的で、提供元を識別するためだけに</strong>表示しており、各社との提携・後援・推奨関係を示すものではありません。当サイトはいずれのAI提供元からも資金提供・記事執筆の依頼を受けていません。<strong>権利者の方から掲載停止のお申し出があった場合は、確認のうえ速やかに削除します。</strong>
+          </span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <span style={{ fontSize: 12, fontWeight: 900, color: "var(--ink-sub)" }}>広告・アフィリエイトについて</span>
+          <span>
+            当サイトの一部ページには広告（アフィリエイトリンク）を掲載しており、「PR」と表示のあるリンクから申し込みがあった場合、当サイトに紹介料が支払われることがあります。<strong>紹介料の有無は、モデルの順位・スコア・掲載可否に一切影響しません。</strong>順位は公開されているベンチマークの数値から機械的に算出しており、掲載料をいただいて順位を変えることはありません。ランキングのページには広告を掲載していません。
           </span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           <span style={{ fontSize: 12, fontWeight: 900, color: "var(--ink-sub)" }}>お問い合わせ・削除依頼</span>
           <span>掲載内容の誤り、権利に関するご指摘、掲載の停止・削除のご依頼は下記までご連絡ください。速やかに確認・対応します。</span>
-          <span className="font-num" style={{ fontSize: 12.5, fontWeight: 700, color: "var(--ink-sub)" }}>
-            contact@example.com
-          </span>
+          <a
+            href="mailto:digitalaigarden@gmail.com"
+            className="font-num"
+            style={{ fontSize: 12.5, fontWeight: 700, color: "var(--ink-sub)" }}
+          >
+            digitalaigarden@gmail.com
+          </a>
         </div>
       </div>
     </footer>

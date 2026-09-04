@@ -3,6 +3,7 @@ import { METRICS } from "@/data/metrics";
 import { chipStyle } from "@/lib/ui";
 import { useIsMobile } from "@/lib/useIsMobile";
 import type { RankedModel } from "@/lib/rankList";
+import BrandLogo from "../BrandLogo";
 
 type Props = {
   metric: MetricKey;
@@ -41,9 +42,9 @@ export default function Rank({ metric, onMetricChange, ranked, onOpenModel }: Pr
               alignItems: "center",
               padding: isMobile ? "10px 12px" : "14px 18px",
               background: "var(--card)",
-              border: "1.5px solid var(--card-border)",
+              border: "1px solid var(--card-border)",
               borderRadius: 18,
-              boxShadow: "0 3px 0 var(--card-border)",
+              boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
               cursor: "pointer",
             }}
           >
@@ -69,7 +70,9 @@ export default function Rank({ metric, onMetricChange, ranked, onOpenModel }: Pr
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 0 }}>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                  {/* モデル名の隣なのでモデルのロゴ */}
+                  <BrandLogo maker={r.maker} model={r.name} size={21} />
                   <span style={{ fontSize: 19, fontWeight: 900 }}>{r.name}</span>
                   <span style={{ fontSize: 12, fontWeight: 700, color: "var(--ink-faint)" }}>{r.maker}</span>
                   <span

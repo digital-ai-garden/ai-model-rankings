@@ -45,9 +45,9 @@ export default function News({ newsList, catChips, onCatChange, catStats, newsUp
                 gap: isMobile ? 10 : 18,
                 padding: isMobile ? "14px 16px" : "20px 22px",
                 background: "var(--card)",
-                border: "1.5px solid var(--card-border)",
+                border: "1px solid var(--card-border)",
                 borderRadius: 20,
-                boxShadow: "0 3px 0 var(--card-border)",
+                boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
               }}
             >
               <div className="mq-hide" style={{ display: isMobile ? "none" : "block" }}>
@@ -82,7 +82,7 @@ export default function News({ newsList, catChips, onCatChange, catStats, newsUp
             <span style={{ fontSize: 17, fontWeight: 900, lineHeight: 1.45 }}>{digestHead}</span>
             <p style={{ margin: 0, fontSize: 13, lineHeight: 1.85, color: "#cec8ba" }}>{digestBody}</p>
           </div>
-          <div style={{ ...cardLg, boxShadow: "0 3px 0 var(--card-border)", display: "flex", flexDirection: "column", gap: 10, padding: "20px 22px" }}>
+          <div style={{ ...cardLg, boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)", display: "flex", flexDirection: "column", gap: 10, padding: "20px 22px" }}>
             <span style={{ fontSize: 14, fontWeight: 900 }}>今月の動き</span>
             {catStats.map((c) => (
               <div key={c.label} style={{ display: "grid", gridTemplateColumns: "96px 1fr 28px", gap: 10, alignItems: "center" }}>
@@ -95,22 +95,6 @@ export default function News({ newsList, catChips, onCatChange, catStats, newsUp
                 </span>
               </div>
             ))}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-              padding: "18px 20px",
-              background: "var(--note-bg)",
-              border: "1.5px dashed var(--note-border)",
-              borderRadius: 20,
-            }}
-          >
-            <span style={{ fontSize: 13, fontWeight: 900, color: "var(--note-fg)" }}>自動更新について</span>
-            <p style={{ margin: 0, fontSize: 12, lineHeight: 1.8, color: "var(--ink-sub)" }}>
-              この欄は現在サイト同梱の初期データを表示しています。毎朝の自動更新には、各社ブログ・ベンチマークサイトを巡回してニュースを取得・要約する定期ジョブが別途必要です（次のアクションとして計画中）。
-            </p>
           </div>
         </aside>
       </div>

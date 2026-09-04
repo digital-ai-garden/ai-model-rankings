@@ -1,6 +1,7 @@
 import { RANKABLE_MODELS as MODELS } from "@/data/models";
 import { METRICS } from "@/data/metrics";
 import { useIsMobile } from "@/lib/useIsMobile";
+import BrandLogo from "../BrandLogo";
 
 type VsRow = {
   label: string;
@@ -64,7 +65,7 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
   const selectStyle = {
     padding: "11px 13px",
     borderRadius: 12,
-    border: "1.5px solid var(--card-border)",
+    border: "1px solid var(--card-border)",
     background: "var(--card-sub-2)",
     fontWeight: 700,
     fontSize: 15,
@@ -87,9 +88,9 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
         <div
           style={{
             background: "var(--card)",
-            border: "1.5px solid var(--card-border)",
+            border: "1px solid var(--card-border)",
             borderRadius: 20,
-            boxShadow: "0 4px 0 var(--card-border)",
+            boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
             padding: 20,
             display: "flex",
             flexDirection: "column",
@@ -103,9 +104,13 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
               </option>
             ))}
           </select>
-          <span className="font-num" style={{ fontSize: 40, fontWeight: 900, color: A.color, lineHeight: 1 }}>
-            {aWins}
-            <span style={{ fontSize: 15, color: "var(--ink-faint-2)" }}> / 10 勝</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {/* selectのoption内にはロゴを置けないため、ここで選択中モデルを示す */}
+            <BrandLogo maker={A.maker} model={A.name} size={26} />
+            <span className="font-num" style={{ fontSize: 40, fontWeight: 900, color: A.color, lineHeight: 1 }}>
+              {aWins}
+              <span style={{ fontSize: 15, color: "var(--ink-faint-2)" }}> / 10 勝</span>
+            </span>
           </span>
           <span style={{ fontSize: 13, color: "var(--ink-weak)" }}>{summaryFor(A, aWins)}</span>
         </div>
@@ -115,9 +120,9 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
         <div
           style={{
             background: "var(--card)",
-            border: "1.5px solid var(--card-border)",
+            border: "1px solid var(--card-border)",
             borderRadius: 20,
-            boxShadow: "0 4px 0 var(--card-border)",
+            boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
             padding: 20,
             display: "flex",
             flexDirection: "column",
@@ -131,9 +136,13 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
               </option>
             ))}
           </select>
-          <span className="font-num" style={{ fontSize: 40, fontWeight: 900, color: B.color, lineHeight: 1 }}>
-            {bWins}
-            <span style={{ fontSize: 15, color: "var(--ink-faint-2)" }}> / 10 勝</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {/* selectのoption内にはロゴを置けないため、ここで選択中モデルを示す */}
+            <BrandLogo maker={B.maker} model={B.name} size={26} />
+            <span className="font-num" style={{ fontSize: 40, fontWeight: 900, color: B.color, lineHeight: 1 }}>
+              {bWins}
+              <span style={{ fontSize: 15, color: "var(--ink-faint-2)" }}> / 10 勝</span>
+            </span>
           </span>
           <span style={{ fontSize: 13, color: "var(--ink-weak)" }}>{summaryFor(B, bWins)}</span>
         </div>
@@ -141,9 +150,9 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
       <div
         style={{
           background: "var(--card)",
-          border: "1.5px solid var(--card-border)",
+          border: "1px solid var(--card-border)",
           borderRadius: 22,
-          boxShadow: "0 4px 0 var(--card-border)",
+          boxShadow: "0 1px 2px rgba(24, 24, 27, 0.04)",
           padding: isMobile ? "16px 18px" : "22px 26px",
           display: "flex",
           flexDirection: "column",

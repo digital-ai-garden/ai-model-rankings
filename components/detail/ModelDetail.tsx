@@ -1,6 +1,7 @@
 import type { ModelDetailView } from "@/lib/detail";
 import { backBtn, cardLg } from "@/lib/ui";
 import { useIsMobile } from "@/lib/useIsMobile";
+import BrandLogo from "../BrandLogo";
 
 export default function ModelDetail({
   md,
@@ -40,7 +41,7 @@ export default function ModelDetail({
                 style={{
                   padding: "5px 12px",
                   borderRadius: 999,
-                  border: "1.5px solid rgba(0,0,0,0.08)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   background: "var(--card)",
                   fontSize: 12,
                   fontWeight: 900,
@@ -54,7 +55,10 @@ export default function ModelDetail({
               {md.quarter}
             </span>
           </div>
-          <h2 style={{ margin: 0, fontSize: isMobile ? 26 : 36, fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.02em" }}>{md.name}</h2>
+          <h2 style={{ margin: 0, fontSize: isMobile ? 26 : 36, fontWeight: 900, lineHeight: 1.15, letterSpacing: "-0.02em", display: "flex", alignItems: "center", gap: 12 }}>
+            <BrandLogo maker={md.maker} model={md.name} size={isMobile ? 28 : 36} />
+            {md.name}
+          </h2>
           <span className="font-num" style={{ fontSize: 15, fontWeight: 700, color: "var(--ink-body-2)" }}>
             {md.price}
           </span>
@@ -70,7 +74,7 @@ export default function ModelDetail({
                   padding: "5px 12px",
                   borderRadius: 999,
                   background: "var(--card)",
-                  border: `1.5px solid ${md.color}`,
+                  border: `1px solid ${md.color}`,
                   fontSize: 12,
                   fontWeight: 900,
                   color: "#3a3630",
