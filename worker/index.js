@@ -22,9 +22,12 @@ const MODELS = {
 const DEFAULT_MODEL = "phoenix";
 const MAX_PROMPT_LEN = 2048;
 
-// ニュースカードの表示枠は4:3。生成時点で合わせておく（後からの切り抜きで
-// 主題が欠けるのを防ぐ）。1024x768 なら無料枠の1日10,000ニューロンに収まる。
-const DEFAULTS = { width: 1024, height: 768, steps: 25, guidance: 4.5 };
+// ニュースカードの表示枠は4:3（実際の表示は最大148x110px）。生成時点で比率を
+// 合わせておく（後からの切り抜きで主題が欠けるのを防ぐため）。
+// 768x576 は表示に対して縦横2.6倍あり高精細画面でも十分。かつ1枚あたり
+// 約1,310ニューロンで、無料枠（1日10,000）に1日7枚ぶん収まる。
+// 1024x768 まで上げると約1,840〜2,370へ増える割に、表示品質は変わらない。
+const DEFAULTS = { width: 768, height: 576, steps: 25, guidance: 4.5 };
 
 function clamp(v, min, max, fallback) {
   const n = Number(v);
