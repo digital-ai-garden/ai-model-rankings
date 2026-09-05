@@ -24,8 +24,12 @@ type Props = {
 };
 
 function bestAxisLabel(m: (typeof MODELS)[number]): string {
-  const candidates = METRICS.filter((x) => !x.lowerBetter && x.key !== "cost" && x.max === 100);
-  const best = candidates.reduce((b, x) => (m[x.key] > m[b.key] ? x : b), candidates[0]);
+  // 未計測（undefined）の軸は「得意分野」の候補にしない
+  const candidates = METRICS.filter(
+    (x) => !x.lowerBetter && x.key !== "cost" && x.max === 100 && typeof m[x.key] === "number"
+  );
+  if (candidates.length === 0) return "—";
+  const best = candidates.reduce((b, x) => ((m[x.key] as number) > (m[b.key] as number) ? x : b), candidates[0]);
   return best.label;
 }
 
@@ -42,19 +46,21 @@ export default function Versus({ aId, bId, mounted, onPickA, onPickB }: Props) {
   let aWins = 0;
   let bWins = 0;
   const rows: VsRow[] = METRICS.map((m) => {
-    const av = A[m.key];
-    const bv = B[m.key];
-    const aBetter = m.lowerBetter ? av < bv : av > bv;
-    const bBetter = m.lowerBetter ? bv < av : bv > av;
+    // どちらかが未計測の軸は勝敗をつけない（0で埋めて負けにするのは嘘になる）
+    const av = A[m.key] as number | undefined;
+    const bv = B[m.key] as number | undefined;
+    const both = typeof av === "number" && typeof bv === "number";
+    const aBetter = both && (m.lowerBetter ? av! < bv! : av! > bv!);
+    const bBetter = both && (m.lowerBetter ? bv! < av! : bv! > av!);
     if (aBetter) aWins++;
     if (bBetter) bWins++;
     const norm = (v: number) => Math.max(2, Math.min(100, (m.lowerBetter ? 1 - v / m.max : v / m.max) * 100));
     return {
       label: m.label,
-      aLabel: m.fmt(av),
-      bLabel: m.fmt(bv),
-      aPct: mounted ? norm(av) : 0,
-      bPct: mounted ? norm(bv) : 0,
+      aLabel: typeof av === "number" ? m.fmt(av) : "—",
+      bLabel: typeof bv === "number" ? m.fmt(bv) : "—",
+      aPct: mounted && typeof av === "number" ? norm(av) : 0,
+      bPct: mounted && typeof bv === "number" ? norm(bv) : 0,
       aBar: aBetter ? A.color : "var(--ink-disabled-4)",
       bBar: bBetter ? B.color : "var(--ink-disabled-4)",
       aFg: aBetter ? A.color : "var(--ink-faint-3)",

@@ -24,6 +24,7 @@ export const QUARTERS = [
 ];
 
 export type MetricKey =
+  | "agent"
   | "cost"
   | "overall"
   | "coding"
@@ -58,6 +59,13 @@ export const METRICS: Metric[] = [
     max: 280,
     fmt: (v) => v.toFixed(0),
     note: "総合指数 ÷ 出力トークン単価。1ドルあたりどれだけ賢いか。",
+  },
+  {
+    key: "agent",
+    label: "エージェント",
+    max: 100,
+    fmt: (v) => v.toFixed(1),
+    note: "DeepSWE v1.1（%）。実在のソフトに対する長時間の実務タスクを、最後までやり切れるかを測る。未計測のモデルは順位に含めない。",
   },
   {
     key: "coding",
@@ -131,6 +139,7 @@ export const RADAR: { key: RadarKey; max: number; label: string }[] = [
 ];
 
 export const AWARD_EN: Record<string, string> = {
+  agent: "AGENT",
   cost: "VALUE",
   overall: "OVERALL",
   coding: "CODING",
@@ -144,6 +153,7 @@ export const AWARD_EN: Record<string, string> = {
 };
 
 export const AWARD_TITLE: Record<string, string> = {
+  agent: "エージェント",
   cost: "コスパ",
   overall: "総合",
   coding: "コーディング",

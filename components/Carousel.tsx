@@ -2,10 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function Carousel({ children }: { children: React.ReactNode }) {
+export default function Carousel({
+  children,
+  auto = false,
+  intervalMs = 3800,
+}: {
+  children: React.ReactNode;
+  /** 自動で横送りする（トップのニュース帯で使用） */
+  auto?: boolean;
+  intervalMs?: number;
+}) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const updateEdges = () => {
     const el = scrollRef.current;
@@ -26,14 +36,37 @@ export default function Carousel({ children }: { children: React.ReactNode }) {
     };
   }, [children]);
 
+  // 自動送り。端まで来たら先頭へ戻る。
+  // 読んでいる最中に動くと邪魔なので、ホバー/タッチ中と、
+  // ユーザーが「動きを減らす」設定にしている場合は止める。
+  useEffect(() => {
+    if (!auto || paused) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const nearEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+      el.scrollTo({ left: nearEnd ? 0 : el.scrollLeft + el.clientWidth * 0.85, behavior: "smooth" });
+    }, intervalMs);
+    return () => clearInterval(t);
+  }, [auto, paused, intervalMs]);
+
   const scrollBy = (dir: 1 | -1) => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
   };
 
+  const pauseProps = auto
+    ? {
+        onMouseEnter: () => setPaused(true),
+        onMouseLeave: () => setPaused(false),
+        onTouchStart: () => setPaused(true),
+      }
+    : {};
+
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} {...pauseProps}>
       <button
         aria-label="前へ"
         onClick={() => scrollBy(-1)}

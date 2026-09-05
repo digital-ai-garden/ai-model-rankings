@@ -57,10 +57,12 @@ export function buildModelDetail(name: string, mounted: boolean): ModelDetailVie
   }
   const rows: ModelDetailRow[] = METRICS.map((mt) => {
     const r = rankOf(dm, mt);
-    const barFrac = mt.lowerBetter ? 1 - dm[mt.key] / mt.max : dm[mt.key] / mt.max;
+    const raw = dm[mt.key] as number | undefined;
+    const barFrac =
+      typeof raw === "number" ? (mt.lowerBetter ? 1 - raw / mt.max : raw / mt.max) : 0;
     return {
       label: mt.label,
-      value: mt.fmt(dm[mt.key]),
+      value: typeof raw === "number" ? mt.fmt(raw) : "—",
       rank: rankLabel(dm, mt),
       barPct: mounted ? Math.max(3, Math.min(100, barFrac * 100)) : 0,
       color: r <= 3 ? dm.color : "var(--ink-disabled-2)",

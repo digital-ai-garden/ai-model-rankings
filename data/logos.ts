@@ -50,6 +50,8 @@ export const PROVIDER_LOGOS: Record<string, ProviderLogo> = {
   MiniMax: { logo: "minimax", color: "#E73562", initial: "M" },
   // Simple Icons に収録なし。Z.ai のロゴマークは黒
   "Z.ai": { logo: "zai", color: "#191817", initial: "Z" },
+  // 2026-09-05 追加（Muse Spark 1.3 の提供元）
+  Meta: { logo: "meta", color: "#0866FF", initial: "M" },
 };
 
 export function providerLogo(maker: string): ProviderLogo {
@@ -83,6 +85,8 @@ export const MODEL_LOGOS: { match: string; mark: ProviderLogo }[] = [
   { match: "MiniMax", mark: { logo: "minimax", color: "#E73562", initial: "M" } },
   // GLM は Z.ai の製品なので Z.ai のマーク
   { match: "GLM", mark: { logo: "zai", color: "#191817", initial: "G" } },
+  // Muse Spark 専用のマークは存在しないため、提供元 Meta のマークを使う
+  { match: "Muse", mark: { logo: "meta", color: "#0866FF", initial: "M" } },
 ];
 
 export function modelLogo(modelName: string, maker: string): ProviderLogo {

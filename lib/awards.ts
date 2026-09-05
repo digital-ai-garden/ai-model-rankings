@@ -23,7 +23,15 @@ export type Award = {
 
 export function buildMetricAwards(): Award[] {
   return METRICS.map((mt) => {
-    const top = [...MODELS].sort((a, b) => (mt.lowerBetter ? a[mt.key] - b[mt.key] : b[mt.key] - a[mt.key])).slice(0, 3);
+    // その指標が未計測のモデルは順位に入れない（0で埋めて最下位にするのは嘘になる）
+    const eligible = MODELS.filter((m) => typeof m[mt.key] === "number");
+    const top = [...eligible]
+      .sort((a, b) =>
+        mt.lowerBetter
+          ? (a[mt.key] as number) - (b[mt.key] as number)
+          : (b[mt.key] as number) - (a[mt.key] as number)
+      )
+      .slice(0, 3);
     const w = top[0];
     return {
       key: mt.key,
@@ -33,12 +41,12 @@ export function buildMetricAwards(): Award[] {
       note: mt.note,
       winner: w.name,
       winnerMaker: w.maker,
-      winValue: mt.fmt(w[mt.key]),
+      winValue: mt.fmt(w[mt.key] as number),
       winColor: w.color,
       winBg: SOFT(w.hue),
       flag: "",
       hasFlag: false,
-      runners: top.slice(1).map((m, i) => ({ rank: i + 2, name: m.name, value: mt.fmt(m[mt.key]) })),
+      runners: top.slice(1).map((m, i) => ({ rank: i + 2, name: m.name, value: mt.fmt(m[mt.key] as number) })),
     };
   });
 }

@@ -144,7 +144,11 @@ export default function Table({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {m.pending && tm.key !== "pOut" ? "測定中" : tm.fmt(m[tm.key])}
+                    {m.pending && tm.key !== "pOut"
+                      ? "測定中"
+                      : typeof m[tm.key] === "number"
+                        ? tm.fmt(m[tm.key] as number)
+                        : "—"}
                   </td>
                 ))}
                 <td

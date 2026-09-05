@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 export default function ErabikataPage() {
   return (
     <div style={{ minHeight: "100vh", paddingBottom: 90 }}>
-      <Header showPicksLink={false} />
+      <Header />
 
       <main style={{ maxWidth: 900, margin: "0 auto", padding: "18px 28px 0" }}>
         <a

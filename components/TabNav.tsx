@@ -18,10 +18,10 @@ export default function TabNav({ tab, onChange }: { tab: TabId; onChange: (t: Ta
       style={{
         display: "flex",
         gap: 6,
-        flexWrap: isMobile ? "nowrap" : "wrap",
-        overflowX: isMobile ? "auto" : "visible",
-        justifyContent: isMobile ? "flex-start" : "center",
-        marginTop: isMobile ? 16 : 30,
+        // 下部固定バーは横に長くなるため、PCでも折り返さず横スクロールさせる
+        flexWrap: "nowrap",
+        overflowX: "auto",
+        justifyContent: "flex-start",
         padding: 6,
         background: "var(--card)",
         border: "1px solid var(--card-border)",
@@ -70,6 +70,34 @@ export default function TabNav({ tab, onChange }: { tab: TabId; onChange: (t: Ta
           </button>
         );
       })}
+
+      {/* タブではなく別ページへのリンク。切替ではなく遷移するので <a> にしている */}
+      <a
+        href="/erabikata/"
+        className="chip-transition"
+        style={{
+          flex: "0 0 auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+          padding: isMobile ? "8px 13px" : "11px 17px",
+          borderRadius: 999,
+          background: "transparent",
+          color: "var(--ink-sub-2)",
+          fontWeight: 700,
+          fontSize: isMobile ? 12.5 : 14,
+          whiteSpace: "nowrap",
+          textDecoration: "none",
+        }}
+      >
+        {!isMobile && (
+          <span className="font-num" style={{ fontSize: 10, letterSpacing: "0.16em", opacity: 0.65 }}>
+            PICKS
+          </span>
+        )}
+        <span>用途から選ぶ</span>
+      </a>
     </nav>
   );
 }

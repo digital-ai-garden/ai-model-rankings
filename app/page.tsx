@@ -4,6 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import Header from "@/components/Header";
 import TabNav from "@/components/TabNav";
 import Footer from "@/components/Footer";
+import Carousel from "@/components/Carousel";
+import NewsRailCard from "@/components/cards/NewsRailCard";
+import NewsTickerCard from "@/components/cards/NewsTickerCard";
 import Home from "@/components/views/Home";
 import News from "@/components/views/News";
 import Awards from "@/components/views/Awards";
@@ -156,11 +159,23 @@ export default function Page() {
   const md = modelDetail || creativeDetail;
 
   return (
-    <div style={{ minHeight: "100vh", paddingBottom: 90 }}>
+    <div style={{ minHeight: "100vh", paddingBottom: 120 }}>
+      {/* ① 今日のAIニュースを最上部で自動横スクロール（毎日来る理由を最初に見せる） */}
+      {tab === "top" && !md && !companyDetail && (
+        <div style={{ maxWidth: 1220, margin: "0 auto", padding: "12px 16px 0" }}>
+          <Carousel auto>
+            {homeNews.map((n) => (
+              <div key={n.title} style={{ flex: "0 0 250px", scrollSnapAlign: "start" }}>
+                <NewsTickerCard n={n} onClick={() => changeTab("news")} />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      )}
+
+      {/* ② ヒーロー画像 */}
       <Header />
-      <div style={{ maxWidth: 1220, margin: "0 auto", padding: "10px 28px 0" }}>
-        <TabNav tab={tab} onChange={changeTab} />
-      </div>
+
       <div style={{ maxWidth: 1220, margin: "0 auto", padding: "10px 28px 0", display: "flex", justifyContent: "flex-end", gap: 10, flexWrap: "wrap" }}>
         <span style={pill}>
           <span style={{ width: 7, height: 7, borderRadius: "50%", background: "oklch(0.7 0.16 145)" }} />
@@ -191,17 +206,13 @@ export default function Page() {
           <>
             {tab === "top" && (
               <Home
-                mainAwards={mainAwards}
-                restAwards={restAwards}
+                awards={awards}
                 news={homeNews}
                 onGoNews={() => changeTab("news")}
                 onGoAwards={() => changeTab("awards")}
                 onGoTable={() => changeTab("table")}
                 onAwardClick={onAwardClick}
                 onOpenModel={openModel}
-                sortKey={sortKey}
-                sortDir={sortDir}
-                onSort={sortBy}
               />
             )}
             {tab === "news" && (
@@ -261,6 +272,28 @@ export default function Page() {
         )}
       </main>
       <Footer />
+
+      {/*
+        ③④ タブは画面下部に固定する（2026-09-05 オーナー指定・スマホアプリ風）。
+        スクロールしても常に触れる位置に置くため position:fixed とし、
+        本文が隠れないよう <div> 側に paddingBottom を確保している。
+      */}
+      <div
+        style={{
+          position: "fixed",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 50,
+          padding: "8px 12px calc(8px + env(safe-area-inset-bottom))",
+          background: "linear-gradient(to top, var(--bg-base) 62%, transparent)",
+          pointerEvents: "none",
+        }}
+      >
+        <div style={{ maxWidth: 1220, margin: "0 auto", pointerEvents: "auto" }}>
+          <TabNav tab={tab} onChange={changeTab} />
+        </div>
+      </div>
     </div>
   );
 }

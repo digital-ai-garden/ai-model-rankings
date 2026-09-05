@@ -5,16 +5,23 @@ import { HUE, C, SOFT, type Metric } from "@/data/metrics";
  * 競技順位（同点処理）。findIndex は使わない — 同点が任意の順に並び、
  * 王冠バッジが誤って1体だけに付く不具合の原因になるため。
  */
+/** その指標が計測済みのモデルだけを母集団にする（未計測を0扱いして順位を歪めない） */
+function measured(metric: Metric): Model[] {
+  return MODELS.filter((x) => typeof x[metric.key] === "number");
+}
+
 export function rankOf(m: Model, metric: Metric): number {
+  const mv = m[metric.key] as number | undefined;
+  if (typeof mv !== "number") return 0; // 未計測は順位なし
   return (
-    MODELS.filter((x) =>
-      metric.lowerBetter ? x[metric.key] < m[metric.key] : x[metric.key] > m[metric.key]
+    measured(metric).filter((x) =>
+      metric.lowerBetter ? (x[metric.key] as number) < mv : (x[metric.key] as number) > mv
     ).length + 1
   );
 }
 
 export function tiedAt(m: Model, metric: Metric): number {
-  return MODELS.filter((x) => x[metric.key] === m[metric.key]).length;
+  return measured(metric).filter((x) => x[metric.key] === m[metric.key]).length;
 }
 
 export function rankLabel(m: Model, metric: Metric): string {

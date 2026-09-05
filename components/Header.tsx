@@ -10,7 +10,7 @@
 //   権利者から申し出があった場合は public/hero-wide.jpg と hero-compact.jpg の
 //   2ファイルを置き換えるだけで済むよう、参照箇所をこのファイル1つに閉じている。
 
-export default function Header({ showPicksLink = true }: { showPicksLink?: boolean }) {
+export default function Header() {
   return (
     <header style={{ maxWidth: 1220, margin: "0 auto", padding: "10px 16px 0" }}>
       <a href="/" style={{ display: "block", textDecoration: "none" }}>
@@ -31,13 +31,6 @@ export default function Header({ showPicksLink = true }: { showPicksLink?: boole
         </picture>
       </a>
 
-      {showPicksLink && (
-        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 8 }}>
-          <a href="/erabikata/" style={{ fontSize: 13.5, fontWeight: 700, whiteSpace: "nowrap" }}>
-            用途から選ぶ →
-          </a>
-        </div>
-      )}
     </header>
   );
 }

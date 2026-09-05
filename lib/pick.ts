@@ -18,15 +18,19 @@ export type TopPick = {
  */
 export function pickTop(metricKey: MetricKey): TopPick {
   const metric = METRICS.find((m) => m.key === metricKey) || METRICS[0];
-  const sorted = [...RANKABLE_MODELS].sort((a, b) =>
-    metric.lowerBetter ? a[metric.key] - b[metric.key] : b[metric.key] - a[metric.key]
+  // 未計測のモデルは「1位」の候補にしない
+  const eligible = RANKABLE_MODELS.filter((m) => typeof m[metric.key] === "number");
+  const sorted = [...eligible].sort((a, b) =>
+    metric.lowerBetter
+      ? (a[metric.key] as number) - (b[metric.key] as number)
+      : (b[metric.key] as number) - (a[metric.key] as number)
   );
   const model = sorted[0];
   return {
     model,
     metricLabel: metric.label,
     metricNote: metric.note,
-    valueLabel: metric.fmt(model[metric.key]),
+    valueLabel: metric.fmt(model[metric.key] as number),
     priceLabel: `$${model.pIn} / $${model.pOut}`,
   };
 }
